@@ -1,15 +1,25 @@
 require 'rubygems'
 require 'nokogiri'   
 require 'open-uri'
-page = Nokogiri::HTML(URI.open("https://coinmarketcap.com/"))
-# puts city = page.css('span')
+page= Nokogiri::HTML(URI.open("https://coinmarketcap.com/"))
+
 def name(page)
-  name_crypto= page.xpath('//tr[*]/td[3]').collect(&:text)
+  name= page.xpath('//tr[*]/td[3]').collect(&:text)
+  i=0
+  j=1
+  while i<name.length do
+    j=j.to_s
+    name[i]= name[i].gsub("Buy","")
+    name[i] = name[i].gsub(j,"")
+    j = j.to_i
+    j+=1
+    i+=1
+  end
+  name
 end
 
 def price(page)
-  # symbol_crypto_array = page.xpath('//tr[*]/td[5]').collect(&:text)
-  price_crypto = page.xpath('//tr[*]/td[4]').collect(&:text)
+ page.xpath('//tr[*]/td[4]').collect(&:text)
   
 end
 
@@ -19,5 +29,4 @@ def hash(page)
   tableau = Hash[name.zip(price)]
   puts tableau
 end
-
-hash(page)
+# hash(page)
