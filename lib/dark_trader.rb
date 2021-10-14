@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'nokogiri'   
 require 'open-uri'
-page= Nokogiri::HTML(URI.open("https://coinmarketcap.com/"))
+# require 'openssl'
 
-def name(page)
+def crypto_name(page)
+  # scraping name crypto
   name= page.xpath('//tr[*]/td[3]').collect(&:text)
   i=0
   j=1
@@ -18,15 +19,12 @@ def name(page)
   name
 end
 
-def price(page)
+def crypto_price(page)
+  # scraping price crypto
  page.xpath('//tr[*]/td[4]').collect(&:text)
-  
 end
+page= Nokogiri::HTML(URI.open("https://coinmarketcap.com/"))
+name=crypto_name(page)
+price = crypto_price(page)
+puts tableau = Hash[name.zip(price)]
 
-def hash(page)
-  name=name(page)
-  price = price(page)
-  tableau = Hash[name.zip(price)]
-  puts tableau
-end
-# hash(page)
