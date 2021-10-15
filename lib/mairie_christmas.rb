@@ -2,11 +2,11 @@ require 'rubygems'
 require 'nokogiri'   
 require 'open-uri'
 
-#  puts city = page.css('a')
+#  scraping email 
 def get_townhall_email(townhall_url)
  townhall_url.xpath('/html/body/div/main/section[2]/div/table/tbody/tr[4]/td[2]').collect(&:text)
 end
-
+#scraping les noms de ville et on utilise la fonction get_townhall_email
 def get_townhall_urls()
   city = []
   email = []

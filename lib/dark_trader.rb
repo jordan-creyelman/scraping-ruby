@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'nokogiri'   
 require 'open-uri'
-# require 'openssl'
-
+ require 'openssl'
+# scraping le nom 
 def crypto_name(page)
   # scraping name crypto
   name= page.xpath('//tr[*]/td[3]').collect(&:text)
@@ -18,9 +18,8 @@ def crypto_name(page)
   end
   name
 end
-
+ # scraping price crypto
 def crypto_price(page)
-  # scraping price crypto
  page.xpath('//tr[*]/td[4]').collect(&:text)
 end
 page= Nokogiri::HTML(URI.open("https://coinmarketcap.com/"))
